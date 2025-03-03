@@ -1,0 +1,78 @@
+In the Bank Account System example, we can define the class relationships as follows:
+
+Bank Class:
+
+A Bank can have multiple Customers.
+A Bank can have multiple Accounts.
+Customer Class:
+
+A Customer can have multiple Accounts.
+A Customer belongs to a Bank.
+Account Class:
+
+An Account belongs to a Customer.
+An Account has a balance.
+Here's a more detailed breakdown:
+
+The Bank class contains a list of customers who have accounts with the bank. Each customer is associated with that bank.
+
+The Customer class represents a bank customer. Each customer can have multiple accounts, such as savings accounts, checking accounts, etc. The customer is associated with a specific bank.
+
+The Account class represents a customer's account. Each account belongs to a specific customer and has an associated balance.
+
+Here's a simplified Python code example illustrating these class relationships:
+
+python
+Copy code
+class Bank:
+    def __init__(self, bank_name):
+        self.bank_name = bank_name
+        self.customers = []
+
+    def add_customer(self, customer):
+        self.customers.append(customer)
+
+class Customer:
+    def __init__(self, customer_id, name):
+        self.customer_id = customer_id
+        self.name = name
+        self.accounts = []
+
+    def add_account(self, account):
+        self.accounts.append(account)
+
+class Account:
+    def __init__(self, account_id, account_type, balance):
+        self.account_id = account_id
+        self.account_type = account_type
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+
+# Create a bank
+my_bank = Bank("My Bank")
+
+# Create a customer
+customer1 = Customer(1, "John Doe")
+
+# Create accounts for the customer
+account1 = Account(101, "Savings", 1000)
+account2 = Account(102, "Checking", 500)
+
+# Add accounts to the customer
+customer1.add_account(account1)
+customer1.add_account(account2)
+
+# Add the customer to the bank
+my_bank.add_customer(customer1)
+In this example, you can see how a bank can have multiple customers, and each customer can have multiple accounts. The classes and their relationships reflect the design of the Bank Account System.
+
+
+
+
