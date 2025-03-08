@@ -27,6 +27,6 @@ urlpatterns = [
     #routes track app
     path('Track/',Listview,name='tracks'),
     path('Track/Add',Addview,name='tracknew'),
-    path('Track/Update',Updateview,name='trackupdate'),
+    path('Track/Update/<id>',Updateview,name='trackupdate'),
 
 ]
