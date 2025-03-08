@@ -3,8 +3,15 @@ from django.shortcuts import render
 
 # Create your views here.
 def Listview(req):
+    tracks=[
+        [1,'python'],
+        [2,'php'],
+        [3,'Java'],
+    ]
     # return HttpResponse('<h1>Tracks</h1>')
-    return render(req,'track/list.html')
+    return render(req,'track/list.html',context={
+        'tracks':tracks
+    })
 def Addview(req):
     # return HttpResponse('<h1>add Track</h1>')
     return render(req,'track/new.html')
