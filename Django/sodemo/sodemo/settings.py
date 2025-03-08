@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     #prof
     'track.apps.TrackConfig',#'track',#not prof
     'trainee.apps.TraineeConfig',#'trainee',
-    'myuser.apps.MyuserConfig'
+    'myuser.apps.MyuserConfig',
 ]
 
 MIDDLEWARE = [
