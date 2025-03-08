@@ -16,7 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from myuser.views import *
+from track.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #route my user app
+    path('Login/',Loginview,name='Login'),
+    path('Logout/',logoutview,name='Logout'),
+    path('Reg/',Regview,name='Reg'),
+    #routes track app
+    path('Track/',Listview,name='tracks'),
+    path('Track/Add',Addview,name='tracknew'),
+    path('Track/Update',Updateview,name='trackupdate'),
+
 ]
