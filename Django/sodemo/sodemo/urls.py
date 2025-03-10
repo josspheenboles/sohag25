@@ -26,4 +26,5 @@ urlpatterns = [
     path('Track/',include('track.urls')),
     #routes trainee app
     path('Trainee/',include('trainee.urls')),
-]
+]+static(settings.MEDIA_URL,document_root=
+         settings.MEDIA_ROOT)
