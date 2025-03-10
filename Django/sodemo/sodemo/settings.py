@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         #enginge postgres
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demosoh',
+        'NAME': 'testso',
         'USER':'postgres',#production noooooooooooo
         'PASSWORD':'123',
         'HOST':'localhost',#best parc.
