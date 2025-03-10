@@ -1,0 +1,11 @@
+#setting db config --->setting db
+#engine,host,user,dbname(must be exsist),password,port
+#install psycopg2
+pip install psycopg2
+pip install psycopg2-binary
+#create model
+#migration
+ python manage.py  makemigrations
+ python manage.py  migrate
+
+
