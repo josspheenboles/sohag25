@@ -14,7 +14,7 @@ Trainee - List
         <th>Action</th>
         {%for trainee in  trainees%}
             <tr>
-                    <td>{{trainee.id}}</td>
+                    <td>{{trainee.id}} {{trainee.isactive}}</td>
                     <td>{{trainee.name}}</td>
                     <td>{{trainee.email}}</td>
                     <td>

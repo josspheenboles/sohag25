@@ -25,6 +25,8 @@ def updatetrainees(req,id):
     return render(req, 'trainee/update.html')
 def deletetrainees(req,id):
     #hard delete
-    Trainee.objects.filter(id=id).delete()
+    # Trainee.objects.filter(id=id).delete()
+    #soft deleet
+    Trainee.objects.filter(id=id).update(isactive=False)
     # return HttpResponseRedirect('/Trainee/')
     return  redirect('trall')
