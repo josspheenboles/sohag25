@@ -4,5 +4,6 @@ urlpatterns=[
     path('',getalltrainees,name='trall'),
     path('/Add',addtrainees,name='tradd'),
     path('/Update/<int : id>',updatetrainees,name='trupdate'),
+    path('/Delete/<int : id>',deletetrainees,name='trdelete'),
 
 ]
