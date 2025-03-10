@@ -21,7 +21,7 @@ def addtrainees(req):
                                ,email=req.POST['tremail']
                                ,image=req.FILES['trimg']
                                )
-    return render(req,'trainee/add.html')
+        return render(req,'trainee/add.html')
 def updatetrainees(req,id):
     context={'oldobj':
              Trainee.objects.get(id=id)}
