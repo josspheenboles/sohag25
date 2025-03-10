@@ -9,3 +9,4 @@ class Trainee(models.Model):
     image=models.ImageField(upload_to='trainee/images')
     createdate=models.DateTimeField(auto_now_add=True)
     updateddate=models.DateTimeField(auto_now=True)
+    isactive=models.BooleanField(default=True)
