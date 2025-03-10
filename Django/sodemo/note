@@ -13,5 +13,6 @@ pip install Pillow
 
 python manage.py inspectdb > models.py
 python manage.py check
-
+#create super user
+python manage.py createsuperuser
 
