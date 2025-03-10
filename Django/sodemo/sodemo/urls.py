@@ -22,4 +22,6 @@ urlpatterns = [
     path('',include('myuser.urls')),
     #routes track app
     path('Track/',include('track.urls')),
+    #routes trainee app
+    path('Trainee/',include('trainee.urls')),
 ]
