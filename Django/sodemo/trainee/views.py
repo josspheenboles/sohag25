@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees
-    context['trainees']=Trainee.objects.all()
+    # context['trainees']=Trainee.objects.all()
+    context['trainees']=Trainee.objects.filter(isactive=True)
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
     if(req.method=='POST'):
@@ -22,7 +23,9 @@ def addtrainees(req):
                                )
     return render(req,'trainee/add.html')
 def updatetrainees(req,id):
-    return render(req, 'trainee/update.html')
+    context={'oldobj':
+             Trainee.objects.get(id=id)}
+    return render(req, 'trainee/update.html',context)
 def deletetrainees(req,id):
     #hard delete
     # Trainee.objects.filter(id=id).delete()
