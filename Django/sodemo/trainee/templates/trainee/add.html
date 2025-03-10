@@ -4,5 +4,16 @@ Trainee - New
 {%endblock%}
 {%block content%}
 <h1>New Trainees</h1>
-
+<form method="post" enctype="multipart/form-data">
+    <label>Name:</label>
+    <input type="text" required name="trname">
+    </br>
+    <label>Email:</label>
+    <input type="text" required name="tremail">
+    </br>
+    <label>Profile image:</label>
+    <input type="file" required name="trimg">
+    </br>
+    <input type="submit" value="Add">
+</form>
 {%endblock%}
