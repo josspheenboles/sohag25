@@ -7,6 +7,6 @@ class Trainee(models.Model):
     name=models.CharField(max_length=50)
     email=models.EmailField()
     #image path upload image to it &
-    # image=models.ImageField()
+    image=models.ImageField(upload_to='trainee/images')
     createdate=models.DateTimeField(auto_now_add=True)
     updateddate=models.DateTimeField(auto_now=True)
