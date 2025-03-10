@@ -11,4 +11,7 @@ pip install psycopg2-binary
 #use image filed in models
 pip install Pillow
 
+python manage.py inspectdb > models.py
+python manage.py check
+
 
