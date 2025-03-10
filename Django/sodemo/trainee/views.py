@@ -2,7 +2,10 @@ from django.shortcuts import render
 from .models import Trainee
 # Create your views here.
 def getalltrainees(req):
-    return render(req,'trainee/list.html')
+    context={}
+    #select * from trianee_trainees
+    context['trainees']=Trainee.objects.all()
+    return render(req,'trainee/list.html',context)
 def addtrainees(req):
     if(req.method=='POST'):
         # #get info
