@@ -1,11 +1,11 @@
 from curses.textpad import Textbox
-
 from django import forms
 from django.forms import TextInput
-
 from track.models import Track2
-# class Traineeaddmodel(forms.ModelForm):
-
+from .models import Trainee
+class Traineeaddmodel(forms.ModelForm):
+    class Meta:
+        modle=Trainee
 class Traineeadd(forms.Form):
     #input text
     trname=forms.CharField(
