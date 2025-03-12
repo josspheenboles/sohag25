@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Trainee
+from track.models import Track2
 from django.http import HttpResponseRedirect
 # Create your views here.
 def getalltrainees(req):
@@ -9,6 +10,8 @@ def getalltrainees(req):
     context['trainees']=Trainee.objects.filter(isactive=True)
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
+    context={}
+    context['tracks']=Track2.objects.all()
     if(req.method=='POST'):
         # #get info
         # trname=req.POST['trname']
@@ -22,7 +25,7 @@ def addtrainees(req):
                                ,image=req.FILES['trimg']
                                )
         return redirect('trall')
-    return render(req,'trainee/add.html')
+    return render(req,'trainee/add.html',context)
 def updatetrainees(req,id):
     context={'oldobj':
              Trainee.objects.get(id=id)}

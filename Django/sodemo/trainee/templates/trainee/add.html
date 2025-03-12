@@ -12,6 +12,14 @@ Trainee - New
     <label>Email:</label>
     <input type="text" required name="tremail">
     </br>
+    <label>Track:</label>
+        <select name="trtrack">
+            <option>select Track</option>
+            {%for track in tracks%}
+                <option value="{{track.id}}">{{track.name}}</option>
+            {%endfor%}
+        </select>
+    </br>
     <label>Profile image:</label>
     <input type="file" required name="trimg">
     </br>

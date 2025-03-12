@@ -19,5 +19,6 @@ python manage.py createsuperuser
 add fk in model
 makemigrations
 migrate
-fk how resp
+===== realtion fk insert  =====
+form add filed to fk
 
