@@ -11,7 +11,7 @@ def getalltrainees(req):
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
     context={}
-    context['tracks']=Track2.objects.all()
+    context['tracks']=Track2.getalltracks()
     # for track in context['tracks']:
     #     print(dir(track))
     if(req.method=='POST'):
@@ -26,7 +26,7 @@ def addtrainees(req):
                                ,email=req.POST['tremail']
                                ,image=req.FILES['trimg']
                                #object of track2 model
-                               ,track=Track2.objects.get(id=
+                               ,track=Track2.gettrackbyid(id=
                                                          req.POST["trtrack"]))
         return redirect('trall')
     return render(req,'trainee/add.html',context)

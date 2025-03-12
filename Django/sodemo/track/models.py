@@ -11,4 +11,9 @@ class Track2(models.Model):
     # col=models.CharField(max_length=255)
     def __str__(self):
         return 'ID:'+str(self.id) +' ,Name:'+self.name
-
+    @classmethod
+    def getalltracks(cls):
+        return cls.objects.all()
+    @classmethod
+    def gettrackbyid(cls,id):
+        return cls.objects.get(id=id)
