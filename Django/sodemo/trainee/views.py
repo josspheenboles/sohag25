@@ -20,14 +20,15 @@ def addtrainees(req):
         return Trainee.gotoalltrainee()
     return render(req,'trainee/add.html',context)
 def updatetrainees(req,id):
-    context={'oldobj':Trainee.gettraineebyid(id=id)}
+    context={'oldobj':Trainee.gettraineebyid(id=id),
+             'tracks':Track2.getalltracks()}
     if(req.method=='POST'):
         Trainee.objects.filter(id=id).update(
             name=req.POST['trname'],
         email=req.POST['tremail'],
         image=req.FILES['trimg'],
         )
-        return  redirect('trall')
+        return  Trainee.gotoalltrainee()
     return render(req, 'trainee/update.html',context)
 def deletetrainees(req,id):
     #hard delete
