@@ -16,13 +16,14 @@ def addtrainees(req):
              'form':Traineeaddmodel()}
 
     if(req.method=='POST' ):
-        form=Traineeaddmodel(data=req.PSOT)
-        if(form.is_bound() and form.is_valid()):
-            Trainee.addtrainee(req.POST['trname']
-                                   ,req.POST['tremail']
-                                   ,req.FILES['trimg']
-                                   #object of track2 model
-                                   ,req.POST["trtrack"])
+        form=Traineeaddmodel(data=req.POST)
+        if(form.is_bound and form.is_valid()):
+            form.save()
+            # Trainee.addtrainee(req.POST['trname']
+            #                        ,req.POST['tremail']
+            #                        ,req.FILES['trimg']
+            #                        #object of track2 model
+            #                        ,req.POST["trtrack"])
             return Trainee.gotoalltrainee()
         else:
             context['error']=form.errors
