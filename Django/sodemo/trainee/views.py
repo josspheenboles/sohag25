@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Trainee
 from track.models import Track2
+from .forms import Traineeadd
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -11,15 +12,22 @@ def getalltrainees(req):
     context['trainees']=Trainee.getallactivetrainee()
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
-    context={'tracks':Track2.getalltracks()}
-    if(req.method=='POST'):
-        Trainee.addtrainee(req.POST['trname']
-                               ,req.POST['tremail']
-                               ,req.FILES['trimg']
-                               #object of track2 model
-                               ,track=req.POST["trtrack"])
-        return Trainee.gotoalltrainee()
-    return render(req,'trainee/add.html',context)
+    context={'tracks':Track2.getalltracks(),
+             'form':Traineeadd()}
+
+    if(req.method=='POST' ):
+        form=Traineeadd(data=req.PSOT)
+        if(form.is_bound() and form.is_valid()):
+            Trainee.addtrainee(req.POST['trname']
+                                   ,req.POST['tremail']
+                                   ,req.FILES['trimg']
+                                   #object of track2 model
+                                   ,req.POST["trtrack"])
+            return Trainee.gotoalltrainee()
+        else:
+            context['error']=form.errors
+            return render(req, 'trainee/addform.html', context)
+    return render(req,'trainee/addform.html',context)
 def updatetrainees(req,id):
     context={'oldobj':Trainee.gettraineebyid(id=id),
              'tracks':Track2.getalltracks()}
