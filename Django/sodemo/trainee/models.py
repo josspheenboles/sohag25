@@ -17,3 +17,10 @@ class Trainee(models.Model):
     #track is not int number in  database
     # in  models track is instance /object
     track=models.ForeignKey(to=Track2,on_delete=models.CASCADE)
+    @classmethod
+    def addtrainee(cls,name,email,image,trackid):
+        Trainee.objects.create(name=name
+                               , email=email
+                               , image=image
+                               # object of track2 model
+                               , track=Track2.gettrackbyid(trackid))
