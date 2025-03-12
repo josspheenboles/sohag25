@@ -3,6 +3,7 @@ from .models import Trainee
 from track.models import Track2
 from django.http import HttpResponseRedirect
 # Create your views here.
+
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees

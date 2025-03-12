@@ -18,6 +18,7 @@ class Trainee(models.Model):
     #track is not int number in  database
     # in  models track is instance /object
     track=models.ForeignKey(to=Track2,on_delete=models.CASCADE)
+
     @classmethod
     def addtrainee(cls,name,email,image,trackid):
         Trainee.objects.create(name=name
@@ -27,7 +28,7 @@ class Trainee(models.Model):
                                , track=Track2.gettrackbyid(trackid))
     @classmethod
     def updatetrainee(cls,traineeid,name,email,image,trackid):
-        Trainee.objects.filter(id=traineeid).update(name=name
+        cls.objects.filter(id=traineeid).update(name=name
                                , email=email
                                , image=image
                                # object of track2 model
@@ -41,3 +42,6 @@ class Trainee(models.Model):
     @classmethod
     def gettraineebyid(cls,id):
         return cls.objects.get(id=id)
+
+    def getimageurl(self):
+        return '/media/'+self.image
