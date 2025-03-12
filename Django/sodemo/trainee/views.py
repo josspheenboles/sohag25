@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Trainee
 from track.models import Track2
-from .forms import Traineeadd
+from .forms import Traineeadd,Traineeaddmodel
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -13,10 +13,10 @@ def getalltrainees(req):
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
     context={'tracks':Track2.getalltracks(),
-             'form':Traineeadd()}
+             'form':Traineeaddmodel()}
 
     if(req.method=='POST' ):
-        form=Traineeadd(data=req.PSOT)
+        form=Traineeaddmodel(data=req.PSOT)
         if(form.is_bound() and form.is_valid()):
             Trainee.addtrainee(req.POST['trname']
                                    ,req.POST['tremail']

@@ -5,7 +5,10 @@ from track.models import Track2
 from .models import Trainee
 class Traineeaddmodel(forms.ModelForm):
     class Meta:
-        modle=Trainee
+        model=Trainee
+        # fields=['name','email']
+        fields='__all__'
+        exclude=['isactive']
 class Traineeadd(forms.Form):
     #input text
     trname=forms.CharField(
