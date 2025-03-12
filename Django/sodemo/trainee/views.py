@@ -23,10 +23,11 @@ def updatetrainees(req,id):
     context={'oldobj':Trainee.gettraineebyid(id=id),
              'tracks':Track2.getalltracks()}
     if(req.method=='POST'):
-        Trainee.objects.filter(id=id).update(
-            name=req.POST['trname'],
+        Trainee.updatetrainee(traineeid=id,
+        name=req.POST['trname'],
         email=req.POST['tremail'],
         image=req.FILES['trimg'],
+        trackid=req.POST['trtrack']
         )
         return  Trainee.gotoalltrainee()
     return render(req, 'trainee/update.html',context)

@@ -25,6 +25,13 @@ class Trainee(models.Model):
                                , image=image
                                # object of track2 model
                                , track=Track2.gettrackbyid(trackid))
+    @classmethod
+    def updatetrainee(cls,traineeid,name,email,image,trackid):
+        Trainee.objects.filter(id=traineeid).update(name=name
+                               , email=email
+                               , image=image
+                               # object of track2 model
+                               , track=Track2.gettrackbyid(trackid))
     @staticmethod
     def gotoalltrainee():
         return redirect('trall')
