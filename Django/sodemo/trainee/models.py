@@ -31,3 +31,6 @@ class Trainee(models.Model):
     @classmethod
     def getallactivetrainee(cls):
         return cls.objects.filter(isactive=True)
+    @classmethod
+    def gettraineebyid(cls,id):
+        return cls.objects.get(id=id)

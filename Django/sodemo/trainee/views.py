@@ -20,8 +20,7 @@ def addtrainees(req):
         return Trainee.gotoalltrainee()
     return render(req,'trainee/add.html',context)
 def updatetrainees(req,id):
-    context={'oldobj':
-             Trainee.objects.get(id=id)}
+    context={'oldobj':Trainee.gettraineebyid(id=id)}
     if(req.method=='POST'):
         Trainee.objects.filter(id=id).update(
             name=req.POST['trname'],
