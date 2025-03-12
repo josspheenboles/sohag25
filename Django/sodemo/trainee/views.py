@@ -7,7 +7,7 @@ def getalltrainees(req):
     context={}
     #select * from trianee_trainees
     # context['trainees']=Trainee.objects.all()
-    context['trainees']=Trainee.objects.filter(isactive=True)
+    context['trainees']=Trainee.getallactivetrainee()
     return render(req,'trainee/list.html',context)
 def addtrainees(req):
     context={'tracks':Track2.getalltracks()}
@@ -17,7 +17,7 @@ def addtrainees(req):
                                ,req.FILES['trimg']
                                #object of track2 model
                                ,track=req.POST["trtrack"])
-        return redirect('trall')
+        return Trainee.gotoalltrainee()
     return render(req,'trainee/add.html',context)
 def updatetrainees(req,id):
     context={'oldobj':

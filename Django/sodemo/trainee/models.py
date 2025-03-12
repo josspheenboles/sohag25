@@ -1,5 +1,6 @@
 from django.db import models
 from track.models import Track2
+from django.shortcuts import redirect
 # Create your models here.
 class Trainee(models.Model):
     #id auto,name,image,creatdate,email
@@ -24,3 +25,9 @@ class Trainee(models.Model):
                                , image=image
                                # object of track2 model
                                , track=Track2.gettrackbyid(trackid))
+    @staticmethod
+    def gotoalltrainee():
+        return redirect('trall')
+    @classmethod
+    def getallactivetrainee(cls):
+        return cls.objects.filter(isactive=True)
