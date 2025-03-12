@@ -3,6 +3,8 @@ from .models import Trainee
 from track.models import Track2
 from .forms import Traineeadd,Traineeaddmodel
 from django.http import HttpResponseRedirect
+import os
+from django.conf import settings
 # Create your views here.
 
 def getalltrainees(req):
@@ -16,7 +18,7 @@ def addtrainees(req):
              'form':Traineeaddmodel()}
 
     if(req.method=='POST' ):
-        form=Traineeaddmodel(data=req.POST)
+        form=Traineeaddmodel(data=req.POST,files=req.FILES)
         if(form.is_bound and form.is_valid()):
             form.save()
             # Trainee.addtrainee(req.POST['trname']
@@ -29,16 +31,28 @@ def addtrainees(req):
             context['error']=form.errors
             return render(req, 'trainee/addform.html', context)
     return render(req,'trainee/addform.html',context)
+
 def updatetrainees(req,id):
-    context={'oldobj':Trainee.gettraineebyid(id=id),
+    oldobj=Trainee.gettraineebyid(id=id)
+    context={'oldobj':oldobj,
              'tracks':Track2.getalltracks()}
+    print('----',req.method)
     if(req.method=='POST'):
+        # Assign new image and save
+        if oldobj.image:
+            old_image_path ='media/trainee/images/'+str(oldobj.image)
+            print(os.path.exists(old_image_path))
+            if os.path.exists(old_image_path):
+                os.remove(old_image_path)
+                print('removed')
         Trainee.updatetrainee(traineeid=id,
         name=req.POST['trname'],
         email=req.POST['tremail'],
-        image=req.FILES['trimg'],
+        myimage=req.FILES['trimg'],
         trackid=req.POST['trtrack']
         )
+        oldobj.image=req.FILES['trimg']
+        oldobj.save()
         return  Trainee.gotoalltrainee()
     return render(req, 'trainee/update.html',context)
 def deletetrainees(req,id):

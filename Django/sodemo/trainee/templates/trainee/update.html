@@ -4,9 +4,10 @@ Trainee - Update
 {%endblock%}
 {%block content%}
 <h1>Update Trainees</h1>
-<img src="/media/{{oldobj.image}}">
+
 <form method="post" enctype="multipart/form-data">
     {%csrf_token%}
+    {{oldobj.image}}
     <label>Name:</label>
     <input type="text" required name="trname" value="{{oldobj.name}}">
     </br>
