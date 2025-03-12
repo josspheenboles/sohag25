@@ -15,4 +15,9 @@ python manage.py inspectdb > models.py
 python manage.py check
 #create super user
 python manage.py createsuperuser
+===== realtion fk =====
+add fk in model
+makemigrations
+migrate
+fk how resp
 

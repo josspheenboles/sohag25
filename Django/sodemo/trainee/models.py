@@ -1,4 +1,5 @@
 from django.db import models
+from track.models import Track2
 # Create your models here.
 class Trainee(models.Model):
     #id auto,name,image,creatdate,email
@@ -10,3 +11,9 @@ class Trainee(models.Model):
     createdate=models.DateTimeField(auto_now_add=True)
     updateddate=models.DateTimeField(auto_now=True)
     isactive=models.BooleanField(default=True)
+    #represent fk constrain
+    # on update --->cascade
+    # on delete --->cascade required
+    #track is not int number in  database
+    # in  models track is instance /object
+    track=models.ForeignKey(to=Track2,on_delete=models.CASCADE)
