@@ -11,6 +11,7 @@ class SignOutView(View):
         req.session.clear()
         logout(req)
         return redirect('Loginnative')
+
 class Signin(View):
     def get(self,req):
         context={'form':SigninForm()}
@@ -72,6 +73,7 @@ from django.shortcuts import redirect
 from django.views import View
 from .models import Myuser
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 class RegViewCustom(View):
     def get(self,req):
         context={'form':Useradd()}

@@ -66,15 +66,17 @@ class TraineeList(View):
         return render(req,'trainee/list.html',context)
 # @login_required()
 def getalltrainees(req):
-    if('id' in req.session):
+    # if('id' in req.session):
+        for s in req.session.items():
+            print(s)
         context={}
         #select * from trianee_trainees
         # context['trainees']=Trainee.objects.all()
         context['trainees']=Trainee.getallactivetrainee()
         context = {'trainees': Trainee.getallactivetrainee()}
         return render(req,'trainee/list.html',context)
-    else:
-        return redirect('Loginnative')
+    # else:
+    #     return redirect('Loginnative')
 @login_required()
 def addtrainees(req):
 
