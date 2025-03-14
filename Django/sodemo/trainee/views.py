@@ -22,7 +22,21 @@ class TraineeViewAdd(View):
             context={'form':form,'error':form.errors}
             return render(request,'trainee/addform.html',context)
 
-
+class TraineeViewupdate(View):
+    def get(self,request,id):
+        context={'form':Traineeaddmodel(instance=
+            Trainee.gettraineebyid(id)
+        )}
+        return  render(request,'trainee/update.html',context)
+    def post(self,request,id):
+        form=Traineeaddmodel(data=request.POST,files=request.FILES,
+                             instance=Trainee.gettraineebyid(id))
+        if(form.is_bound and form.is_valid()):
+            form.save()
+            return Trainee.gotoalltrainee()
+        else:
+            context={'form':form,'error':form.errors}
+            return render(request,'trainee/update.html',context)
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees
