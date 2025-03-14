@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from .models import Trainee
 from track.models import Track2
 from .forms import Traineeadd,Traineeaddmodel
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect,HttpResponse
 import os
 from django.conf import settings
@@ -44,6 +45,7 @@ class TraineeViewAdd(View):
             return render(request,'trainee/addform.html',context)
 
 class TraineeViewupdate(View):
+    @login_required()
     def get(self,request,id):
         context={'form':Traineeaddmodel(instance=
             Trainee.gettraineebyid(id)
@@ -58,13 +60,14 @@ class TraineeViewupdate(View):
         else:
             context={'form':form,'error':form.errors}
             return render(request,'trainee/update.html',context)
-
+@login_required()
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees
     # context['trainees']=Trainee.objects.all()
     context['trainees']=Trainee.getallactivetrainee()
     return render(req,'trainee/list.html',context)
+@login_required()
 def addtrainees(req):
     context={'tracks':Track2.getalltracks(),
              'form':Traineeaddmodel()}
