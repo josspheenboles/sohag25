@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse_lazy
 from .models import Trainee
 from track.models import Track2
 from .forms import Traineeadd,Traineeaddmodel
@@ -10,11 +11,21 @@ from django.views import View
 from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView
 # Create your views here.
 #view list trainee
+class TraineeShow(DetailView):
+    model = Trainee
+    context_object_name = 'trainee'
+
 class TraineeList(ListView):
     model = Trainee
     template_name = 'trainee/list.html'
     context_object_name = 'trainees'
-
+class TraineeViewAdd_G(CreateView):
+    #generate form --->model--->insert operation
+    model = Trainee
+    template_name = 'trainee/addform.html'
+    success_url = reverse_lazy('trall') #
+    fields = '__all__'
+    exclude = ['isactive']
 
 class TraineeViewAdd(View):
     def get(self,request):

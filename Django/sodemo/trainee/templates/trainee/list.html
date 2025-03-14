@@ -20,12 +20,13 @@ Trainee - List
                     <td>{{trainee.email}}</td>
                     <td>{{trainee.track.name}}</td>
                     <td>
-                       <img src="/media/{{trainee.image}}" alt="{{trainee.image}}"/>
+                       <img width="20%" height="20%" src="/media/{{trainee.image}}" alt="{{trainee.image}}"/>
                     </td>
                     <td>{{trainee.createdate}}</td>
                     <td>
                         <a href="{%url 'trupdate' trainee.id%}">Update</a>
                         <a href="{%url 'trdelete' trainee.id%}">Delete</a>
+                        <a href="{%url 'trshow' trainee.id %}">Show</a>
 
                     </td>
             </tr>
