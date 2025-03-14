@@ -3,12 +3,14 @@ from django import forms
 from django.forms import TextInput
 from track.models import Track2
 from .models import Trainee
+# describe form
 class Traineeaddmodel(forms.ModelForm):
     class Meta:
         model=Trainee
         # fields=['name','email']
         fields='__all__'
         exclude=['isactive']
+
 class Traineeadd(forms.Form):
     #input text
     trname=forms.CharField(

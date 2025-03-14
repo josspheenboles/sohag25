@@ -19,8 +19,10 @@ class TraineeList(ListView):
     model = Trainee
     template_name = 'trainee/list.html'
     context_object_name = 'trainees'
+
 class TraineeViewAdd_G(CreateView):
     #generate form --->model--->insert operation
+    # checl age traineee >21
     model = Trainee
     template_name = 'trainee/addform.html'
     success_url = reverse_lazy('trall') #
@@ -56,6 +58,7 @@ class TraineeViewupdate(View):
         else:
             context={'form':form,'error':form.errors}
             return render(request,'trainee/update.html',context)
+
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees
