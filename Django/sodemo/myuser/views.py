@@ -16,6 +16,14 @@ def logoutview(request):
     return obj
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
+from django.views import View
+class RegViewCustom(View):
+    def get(self,req):
+        pass
+
+    def post(self,req):
+        pass
+
 def Regview(req):
     context={'form':UserCreationForm()}
     if(req.method=='POST'):
