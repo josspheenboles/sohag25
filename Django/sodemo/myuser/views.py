@@ -1,5 +1,50 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.views import View
+from .forms import *
+from .models import Usernative
+
+
+class SignOutView(View):
+    def get(self,req):
+        req.session.clear()
+        return redirect('Loginnative')
+class Signin(View):
+    def get(self,req):
+        context={'form':SigninForm()}
+        return render(req,'nativr/login.html',context)
+    def post(self,req):
+        logeduserobj=Usernative.objects.filter(
+            username=req.POST['username'],
+            password=req.POST['password']).first()
+
+        if(logeduserobj is not None):
+            ##sesion
+            req.session['id']=logeduserobj.id
+            req.session['name']=logeduserobj.username
+            return redirect('trall')
+        else:
+            context={'msg':'invalid username or password'}
+            return render(req, 'nativr/login.html', context)
+
+
+class Signup(View):
+    def get(self,req):
+        context={'form':SignupForm()}
+        return render(req,'nativr/reg.html',context)
+    def post(self,req):
+        form=SignupForm(data=req.POST)
+        if(form.is_bound and form.is_valid()):
+            form.save()
+            return redirect('Loginnative')
+        else:
+            context={
+                'form':form,
+                'msg':form.errors
+            }
+            return render(req, 'nativr/reg.html', context)
+
+
 
 # Create your views here.
 # Define view

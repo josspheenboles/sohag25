@@ -64,16 +64,20 @@ class TraineeList(View):
     def get(self,req):
         context={'trainees':Trainee.getallactivetrainee()}
         return render(req,'trainee/list.html',context)
-@login_required()
+# @login_required()
 def getalltrainees(req):
-    context={}
-    #select * from trianee_trainees
-    # context['trainees']=Trainee.objects.all()
-    context['trainees']=Trainee.getallactivetrainee()
-    context = {'trainees': Trainee.getallactivetrainee()}
-    return render(req,'trainee/list.html',context)
+    if('id' in req.session):
+        context={}
+        #select * from trianee_trainees
+        # context['trainees']=Trainee.objects.all()
+        context['trainees']=Trainee.getallactivetrainee()
+        context = {'trainees': Trainee.getallactivetrainee()}
+        return render(req,'trainee/list.html',context)
+    else:
+        return redirect('Loginnative')
 @login_required()
 def addtrainees(req):
+
     context={'tracks':Track2.getalltracks(),
              'form':Traineeaddmodel()}
 

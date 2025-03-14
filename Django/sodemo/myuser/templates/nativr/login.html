@@ -1,0 +1,8 @@
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Signin">
+</form>
+<div style="color:red">
+    <h1>{{msg}}</h1>
+</div>
