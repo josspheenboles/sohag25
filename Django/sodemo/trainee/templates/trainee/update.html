@@ -7,29 +7,8 @@ Trainee - Update
 
 <form method="post" enctype="multipart/form-data">
     {%csrf_token%}
-    {{oldobj.image}}
-    <label>Name:</label>
-    <input type="text" required name="trname" value="{{oldobj.name}}">
-    </br>
-    <label>Email:</label>
-    <input type="text" required name="tremail" value="{{oldobj.email}}">
-    </br>
-    <label>Track:</label>
-        <select name="trtrack">
-            <option>select Track</option>
-            {%for track in tracks%}
-<!--            oldobj is traine-->
-                {%if track.id == oldobj.track.id %}
-                    <option value="{{track.id}}" selected>{{track.name}}</option>
-                {%else%}
-                    <option value="{{track.id}}">{{track.name}}</option>
-                {%endif%}
-            {%endfor%}
-        </select>
-    </br>
-    <label>Profile image:</label>
-    <input type="file" required name="trimg">
-    </br>
+    {{form.as_p}}
+
     <input type="submit" value="Update">
 </form>
 {%endblock%}

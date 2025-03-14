@@ -33,27 +33,16 @@ def addtrainees(req):
     return render(req,'trainee/addform.html',context)
 
 def updatetrainees(req,id):
-    oldobj=Trainee.gettraineebyid(id=id)
-    context={'oldobj':oldobj,
-             'tracks':Track2.getalltracks()}
-    print('----',req.method)
+    context={'form':Traineeaddmodel(instance=Trainee.gettraineebyid(id))}
     if(req.method=='POST'):
-        # Assign new image and save
-        if oldobj.image:
-            old_image_path ='media/trainee/images/'+str(oldobj.image)
-            print(os.path.exists(old_image_path))
-            if os.path.exists(old_image_path):
-                os.remove(old_image_path)
-                print('removed')
-        Trainee.updatetrainee(traineeid=id,
-        name=req.POST['trname'],
-        email=req.POST['tremail'],
-        myimage=req.FILES['trimg'],
-        trackid=req.POST['trtrack']
-        )
-        oldobj.image=req.FILES['trimg']
-        oldobj.save()
-        return  Trainee.gotoalltrainee()
+        form=Traineeaddmodel(data=req.POST,files=req.FILES,instance=
+                             Trainee.gettraineebyid(id))
+        if(form.is_bound and form.is_valid()):
+            form.save()#update
+            return Trainee.gotoalltrainee()
+        else:
+            context['errors']=form.errors
+            return render(req, 'trainee/update.html',context)
     return render(req, 'trainee/update.html',context)
 def deletetrainees(req,id):
     #hard delete

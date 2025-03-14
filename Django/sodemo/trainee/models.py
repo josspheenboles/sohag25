@@ -3,7 +3,6 @@ from track.models import Track2
 from django.shortcuts import redirect
 import os
 
-
 def user_directory_path(instance, filename):
     # Upload files to "media/profile_images/{id}/{filename}"
     return f'trainee/images/{instance.id}/{filename}'
@@ -30,11 +29,12 @@ class Trainee(models.Model):
         if self.pk:
             old_profile = Trainee.objects.filter(pk=self.pk).first()
             if old_profile and old_profile.image and old_profile.image != self.image:
-                old_image_path = os.path.join(old_profile.profile_image.path)
+                old_image_path = os.path.join(old_profile.image.path)
                 if os.path.exists(old_image_path):
                     os.remove(old_image_path)
-
+        #not db
         super().save(*args, **kwargs)  # ✅ Ensures correct upload path
+
     @classmethod
     def addtrainee(cls,name,email,image,trackid):
         Trainee.objects.create(name=name
@@ -43,7 +43,7 @@ class Trainee(models.Model):
                                # object of track2 model
                                , track=Track2.gettrackbyid(trackid))
     @classmethod
-    def updatetrainee(cls,traineeid,name,email,myimage,trackid):
+    def updatetrainee(cls,traineeid,name,email,myimage,trackid,traineeobj):
         # print(image,type(image))
         cls.objects.filter(id=traineeid).update(name=name
                                , email=email
