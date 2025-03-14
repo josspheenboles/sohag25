@@ -60,12 +60,17 @@ class TraineeViewupdate(View):
         else:
             context={'form':form,'error':form.errors}
             return render(request,'trainee/update.html',context)
+class TraineeList(View):
+    def get(self,req):
+        context={'trainees':Trainee.getallactivetrainee()}
+        return render(req,'trainee/list.html',context)
 @login_required()
 def getalltrainees(req):
     context={}
     #select * from trianee_trainees
     # context['trainees']=Trainee.objects.all()
     context['trainees']=Trainee.getallactivetrainee()
+    context = {'trainees': Trainee.getallactivetrainee()}
     return render(req,'trainee/list.html',context)
 @login_required()
 def addtrainees(req):

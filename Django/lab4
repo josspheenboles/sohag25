@@ -1,0 +1,4 @@
+listtrainee,add trainee--->using class based vieww
+update trainee,delete--->using generice view
+login,logout,registration
+no routs work with out login
