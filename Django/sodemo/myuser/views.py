@@ -14,11 +14,16 @@ def logoutview(request):
     obj.write('<h2>hi</h2>')
     obj['content-type']='text/plain'
     return obj
-
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect
 def Regview(req):
-    obj=HttpResponse()
-    obj.write('''
-    <form>
-    
-    </form>''')
-    return obj
+    context={'form':UserCreationForm()}
+    if(req.method=='POST'):
+        form=UserCreationForm(data=req.POST)
+        if(form.is_bound and form.is_valid()):
+            form.save()
+            return redirect('Login')
+        else:
+            context['msg']=form.errors
+            return render(req, 'myuser/reg.html', context)
+    return render(req, 'myuser/reg.html', context)
