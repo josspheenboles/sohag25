@@ -2,10 +2,26 @@ from django.shortcuts import render,redirect
 from .models import Trainee
 from track.models import Track2
 from .forms import Traineeadd,Traineeaddmodel
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 import os
 from django.conf import settings
+#class based view
+from django.views import View
 # Create your views here.
+class TraineeViewAdd(View):
+    def get(self,request):
+        context={'form':Traineeaddmodel()}
+        return render(request,'trainee/addform.html',context)
+    def post(self,request):
+        #get data inserted by end user
+        form=Traineeaddmodel(data=request.POST,files=request.FILES)
+        if(form.is_bound and form.is_valid()):
+            form.save()
+            return Trainee.gotoalltrainee()
+        else:
+            context={'form':form,'error':form.errors}
+            return render(request,'trainee/addform.html',context)
+
 
 def getalltrainees(req):
     context={}
@@ -31,10 +47,11 @@ def addtrainees(req):
             context['error']=form.errors
             return render(req, 'trainee/addform.html', context)
     return render(req,'trainee/addform.html',context)
-
 def updatetrainees(req,id):
     context={'form':Traineeaddmodel(instance=Trainee.gettraineebyid(id))}
     if(req.method=='POST'):
+        #upload media asd.png--->uploading
+        #upload media asd.png--->uploading asdrandomstr.png
         form=Traineeaddmodel(data=req.POST,files=req.FILES,instance=
                              Trainee.gettraineebyid(id))
         if(form.is_bound and form.is_valid()):
