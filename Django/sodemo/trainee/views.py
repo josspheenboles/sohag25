@@ -7,7 +7,15 @@ import os
 from django.conf import settings
 #class based view
 from django.views import View
+from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView
 # Create your views here.
+#view list trainee
+class TraineeList(ListView):
+    model = Trainee
+    template_name = 'trainee/list.html'
+    context_object_name = 'trainees'
+
+
 class TraineeViewAdd(View):
     def get(self,request):
         context={'form':Traineeaddmodel()}
