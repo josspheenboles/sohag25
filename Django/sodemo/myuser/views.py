@@ -3,11 +3,13 @@ from django.shortcuts import render,redirect
 from django.views import View
 from .forms import *
 from .models import Usernative
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 
 class SignOutView(View):
     def get(self,req):
         req.session.clear()
+        logout(req)
         return redirect('Loginnative')
 class Signin(View):
     def get(self,req):
@@ -17,11 +19,14 @@ class Signin(View):
         logeduserobj=Usernative.objects.filter(
             username=req.POST['username'],
             password=req.POST['password']).first()
-
-        if(logeduserobj is not None):
+        loggedauthuserobj=authenticate(
+                username=req.POST['username'],
+                password=req.POST['password'])
+        if(logeduserobj is not None and loggedauthuserobj):
             ##sesion
             req.session['id']=logeduserobj.id
             req.session['name']=logeduserobj.username
+            login(req)
             return redirect('trall')
         else:
             context={'msg':'invalid username or password'}
@@ -36,6 +41,9 @@ class Signup(View):
         form=SignupForm(data=req.POST)
         if(form.is_bound and form.is_valid()):
             form.save()
+            User.objects.create_user(username=form.clean_data['username'],
+                                     password=form.clean_data['password'],
+                                     isactive=True)
             return redirect('Loginnative')
         else:
             context={
