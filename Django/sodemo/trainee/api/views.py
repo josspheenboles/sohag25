@@ -18,7 +18,15 @@ class Trainee_List_Creat(APIView):
          status=status.HTTP_200_OK
       )
    def post(self,request):
-      pass
+      #get data
+      #serlization
+      trainee_ser_object=Trainee_serlizer(data=request.data)
+      #valid
+      if(trainee_ser_object.is_valid()):
+         #response
+         trainee_ser_object.save()
+         return Response(data=trainee_ser_object.data,
+                         status=status.HTTP_201_CREATED)
 
 class Trainee_Update_Delete_GETbyid(APIView):
    pass
