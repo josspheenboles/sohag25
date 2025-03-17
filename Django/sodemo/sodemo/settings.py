@@ -84,12 +84,12 @@ WSGI_APPLICATION = 'sodemo.wsgi.application'
 DATABASES = {
     'default': {
         #enginge postgres
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testso',
-        'USER':'postgres',#production noooooooooooo
-        'PASSWORD':'123',
-        'HOST':'localhost',#best parc.
-        'PORT':5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR/'testso',
+        # 'USER':'postgres',#production noooooooooooo
+        # 'PASSWORD':'123',
+        # 'HOST':'localhost',#best parc.
+        # 'PORT':5432,
 
 
     }
