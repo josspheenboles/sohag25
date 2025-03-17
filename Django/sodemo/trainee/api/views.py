@@ -6,6 +6,7 @@ from ..models import Trainee
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 #function based 2 function
 #function handel --->getall,cretae
 #function handel --->getbyid,updtaebyid,delete byid
@@ -29,7 +30,39 @@ class Trainee_List_Creat(APIView):
                          status=status.HTTP_201_CREATED)
 
 class Trainee_Update_Delete_GETbyid(APIView):
-   pass
+   #return for trainee with this pk
+   def get(self,request,pk):
+      object=Trainee_serlizer.gettraineebyid(pk)
+      return Response(
+          data=object,
+          status=status.HTTP_200_OK
+       )
+   #update for specific field
+   def put(self,request,pk):
+      #getoldinstance
+      oldobj=get_object_or_404(Trainee,id=pk)
+      #getdata selization & pass old object
+      objserlized=Trainee_serlizer(data=request.data,instance=oldobj)
+      #validat
+      if(objserlized.is_valid()):
+         #save
+         objserlized.save()
+         #response
+         return Response(
+            data=objserlized.data,
+            status=status.HTTP_200_OK
+         )
+      else:
+         return Response(data=
+                         {
+                            'errors':objserlized.errors
+                         })
+   def delete(self,request,pk):
+      # getoldinstance
+      oldobj = get_object_or_404(Trainee, id=pk)
+      oldobj.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
+
 # class Trainee_List_Creat(generics.ListCreateAPIView):
 #    queryset = Trainee.getallactivetrainee()
 #    serializer_class = Trainee_serlizer
