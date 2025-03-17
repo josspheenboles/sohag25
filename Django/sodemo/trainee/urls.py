@@ -4,7 +4,7 @@ from .api.views import *
 #router simple,default
 from rest_framework import routers
 #simple router
-r=routers.SimpleRouter()
+r=routers.DefaultRouter()
 r.register(r'API',TraineeView)
 
 urlpatterns=[
