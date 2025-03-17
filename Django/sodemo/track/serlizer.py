@@ -16,3 +16,7 @@ class Track_serlizer(serializers.Serializer):
 
     def create(self, validated_data):
         return  Track2.objects.create(name=validated_data['name'])
+    def update(self, instance, validated_data):
+        instance.name=validated_data['name']
+        instance.save()
+        return instance

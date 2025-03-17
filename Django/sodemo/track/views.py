@@ -28,17 +28,29 @@ def findview(req,name):
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .models import Track2
 
 from .serlizer import Track_serlizer
 
 @api_view(['GET','PUT','DELETE','PATCH'])
 def Track_Update_Get_Delete(request,id):
+    track=Track2.objects.get(id=id)
     if(request.method=='GET'):
         return Response(
             data=Track_serlizer.gettrackbyid(id).data,
             status=status.HTTP_200_OK)
     elif(request.method=='PUT'):
-        pass
+        #get json serlization
+        trserlizedobj=Track_serlizer(
+            data=request.data,
+            instance=track)
+        #check is valid
+        if(trserlizedobj.is_valid()):
+            #save
+            trserlizedobj.save()
+            #return response
+            return Response(data=trserlizedobj.data
+                            ,status=status.HTTP_200_OK)
     if (request.method == 'DELETE'):
         pass
 
