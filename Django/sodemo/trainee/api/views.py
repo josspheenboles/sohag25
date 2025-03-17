@@ -11,6 +11,16 @@ from django.shortcuts import get_object_or_404
 #function handel --->getall,cretae
 #function handel --->getbyid,updtaebyid,delete byid
 
+#view set
+#normal view set
+#model viewset
+from rest_framework import viewsets
+class TraineeView(viewsets.ModelViewSet):
+   queryset = Trainee.getallactivetrainee()
+   serializer_class = Trainee_serlizer
+
+
+
 #class based view
 class Trainee_List_Creat(APIView):
    def get(self,request):
