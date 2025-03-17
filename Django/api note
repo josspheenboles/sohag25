@@ -1,0 +1,2 @@
+prerequest--->django
+pip install djangorestframework

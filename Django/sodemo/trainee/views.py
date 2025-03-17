@@ -12,7 +12,8 @@ from django.views import View
 from django.views.generic import CreateView,UpdateView,ListView,DetailView,DeleteView
 # Create your views here.
 #view list trainee
-class TraineeShow(DetailView):
+
+class TraineeShow(DetailView):#id
     model = Trainee
     context_object_name = 'trainee'
 

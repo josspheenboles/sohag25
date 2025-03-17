@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'track.apps.TrackConfig',#'track',#not prof
     'trainee.apps.TraineeConfig',#'trainee',
     'myuser.apps.MyuserConfig',
+    #django rest
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
