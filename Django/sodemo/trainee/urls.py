@@ -3,7 +3,10 @@ from .views import *
 from .api.views import *
 #router simple,default
 from rest_framework import routers
-#simple router
+#simple router--->crud
+
+#default router--->help,prefix json or xml,crud,auth,
+
 r=routers.DefaultRouter()
 r.register(r'API',TraineeView)
 
