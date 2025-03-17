@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from .api.views import *
 urlpatterns=[
     path('',getalltrainees,name='trall'),
     # path('',TraineeList.as_view(),name='trall'),
@@ -10,5 +11,7 @@ urlpatterns=[
     path('Update/<int:id>',updatetrainees,name='trupdate'),
     # path('Update/<int:id>',TraineeViewupdate.as_view(),name='trupdate'),
     path('Delete/<int:id>',deletetrainees,name='trdelete'),
+    path('API/',Trainee_List_Creat.as_view()),
+    path('API/<pk>/',Trainee_Update_Delete_GETbyid.as_view()),
 
 ]
