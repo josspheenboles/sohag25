@@ -8,5 +8,6 @@ urlpatterns=[
     path('Delete/<int:id>',Deleteview,name='trackdelete'),
     path('<str:name>',findview,name='trackfind'),
     # path('API/',hellowrld),
-    path('API/',List_Create_Track)
+    path('API/',List_Create_Track),
+    path('API/<int:id>',Track_Update_Get_Delete),
 ]

@@ -31,6 +31,29 @@ from rest_framework import status
 
 from .serlizer import Track_serlizer
 
+@api_view(['GET','PUT','DELETE','PATCH'])
+def Track_Update_Get_Delete(request,id):
+    if(request.method=='GET'):
+        return Response(
+            data=Track_serlizer.gettrackbyid(id).data,
+            status=status.HTTP_200_OK)
+    elif(request.method=='PUT'):
+        pass
+    if (request.method == 'DELETE'):
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
 #list track & add new track
 @api_view(['GET','POST'])
 def List_Create_Track(request):
