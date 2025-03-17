@@ -38,13 +38,13 @@ def List_Create_Track(request):
         return Response(data=Track_serlizer.translatealltracktojson(),status=status.HTTP_202_ACCEPTED)
     elif(request.method=='POST'):
         #de serlizer convert from json to objcte of Track_serlizer
-        track_selized_object=Track_serlizer(name=request)
+        track_selized_object=Track_serlizer(data=request.data)
         print(track_selized_object)#objct of track_serlizer
-        track_selized_object.save()
-
-        # name=request.data['name']
-        # Track2.objects.create(name=request.data['name'])
-        return Response(data=track_selized_object.data,status=status.HTTP_201_CREATED)
+        if(track_selized_object.is_valid()):
+            track_selized_object.save()
+            return Response(data=track_selized_object.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 @api_view(['GET'])
 def hellowrld(req):
 

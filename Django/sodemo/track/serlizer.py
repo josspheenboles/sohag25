@@ -9,3 +9,6 @@ class Track_serlizer(serializers.Serializer):
         tracks = Track2.objects.all()
         tracks_serlized = Track_serlizer(tracks, many=True)
         return tracks_serlized.data
+
+    def create(self, validated_data):
+        return  Track2.objects.create(name=validated_data['name'])
