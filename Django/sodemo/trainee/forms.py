@@ -20,7 +20,7 @@ class Traineeadd(forms.Form):
     tremail=forms.EmailField(label='Email')
     trimg=forms.ImageField(label='Profile Image')
     #choises tuple of tuples
-    trtrack=forms.ChoiceField(widget=forms.SelectMultiple,
-        choices=[(track.id,track.name) for track in Track2.getalltracks()]
-    )
+    # trtrack=forms.ChoiceField(widget=forms.SelectMultiple,
+    #     choices=[(track.id,track.name) for track in Track2.getalltracks()]
+    # )
     # test=forms.DateTimeField()
