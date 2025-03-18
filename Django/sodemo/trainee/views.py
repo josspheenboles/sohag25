@@ -3,7 +3,9 @@ from django.urls import reverse_lazy
 from .models import Trainee
 from track.models import Track2
 from .forms import Traineeadd,Traineeaddmodel
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
+
+
 from django.http import HttpResponseRedirect,HttpResponse
 import os
 from django.conf import settings
@@ -32,6 +34,7 @@ class TraineeViewAdd_G(CreateView):
     exclude = ['isactive']
 
 class TraineeViewAdd(View):
+
     def get(self,request):
         context={'form':Traineeaddmodel()}
         return render(request,'trainee/addform.html',context)

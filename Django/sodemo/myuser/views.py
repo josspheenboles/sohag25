@@ -13,7 +13,7 @@ from .serlizer import *
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes,force_str
 from .utils import accouttoken
 
 @api_view(['POST'])
@@ -52,6 +52,26 @@ def customreg(request):
         return Response(
             data={'errors':serlizedoobj.errors},
                   status=status.HTTP_400_BAD_REQUEST
+        )
+from django.shortcuts import get_object_or_404
+@api_view(['GET'])
+def verifiy_email(request):
+    #get data
+    uid=force_str(urlsafe_base64_decode(request.data['uidb64']))
+    token=request.data['token']
+    user=get_object_or_404(CustomUser,id=uid)
+    if(user is not None
+            and accouttoken.check_token(token)):
+        user.email_ver=True
+        user.save()
+        return Response(
+            data={'msg':'verification done'},
+            status=status.HTTP_200_OK
+        )
+    else:
+        return Response(
+            data={'msg': 'invalid token url done'},
+            status=status.HTTP_406_NOT_ACCEPTABLE
         )
 
 

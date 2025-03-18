@@ -1,2 +1,22 @@
 prerequest--->django
 pip install djangorestframework
+pip install djangorestframework_simplejwt
+-settings.py
+    add
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ],
+    }
+-in urls master
+    from rest_framework_simplejwt import views as jwt_views
+     path('api/token/', jwt_views.TokenObtainPairView.as_view()),
+    path('api/token/refresh/',  jwt_views.TokenRefreshView.as_view()),
+-in views
+    from rest_framework.permissions import IsAuthenticated ,IsAdmin
+    -class based view
+        permission_classes = (IsAuthenticated, )
+    -function based
+            from rest_framework.decorators import permission_classes
+            @permission_classes([IsAuthenticated,])
+    -Generic
