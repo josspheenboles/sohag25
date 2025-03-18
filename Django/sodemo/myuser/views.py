@@ -5,6 +5,14 @@ from .forms import *
 from .models import Usernative
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+#====================rest re
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
+
+
+
+
 
 class SignOutView(View):
     def get(self,req):
