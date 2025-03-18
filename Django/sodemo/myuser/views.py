@@ -9,6 +9,50 @@ from django.contrib.auth import authenticate,login,logout
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
+from .serlizer import *
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from .utils import accouttoken
+
+@api_view(['POST'])
+def customreg(request):
+    #get data &deserlization
+    serlizedoobj=CustomuserSerlizer(data=request.data)
+    #validate
+    if(serlizedoobj.is_valid()):
+    #if valids
+        # save
+        user=serlizedoobj.save()
+        subject='thnx for registration ,kindly verified'
+        message=render_to_string(
+            'myuser/veemail.html',
+            {
+                'user':user,
+                'domain':request.get_host(),
+                'uid':urlsafe_base64_decode(force_bytes(user.pk)),
+                'token':accouttoken.make_token(user),
+            }        )
+        try:
+            send_mail(subject,message,'norelpay@gmail.com',[user.email])
+            return Response(
+                data=CustomuserSerlizer(instance=user).data,
+                status=status.HTTP_201_CREATED
+            )
+        except:
+            #else &delete just savd user
+            user.delete()
+            return Response(
+                data={'msg':'fake email'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    #else
+    else:
+        return Response(
+            data={'errors':serlizedoobj.errors},
+                  status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 
